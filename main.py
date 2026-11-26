@@ -18,7 +18,8 @@ def main() -> None:
     # Gate: /output/entry.txt must be UTF-8 text of 1 to 30 characters,
     # a single word, not only white space.
     assert 1 <= len(WORD) <= 30, len(WORD)
-    assert WORD.strip() == WORD and " " not in WORD, WORD
+    # Exactly one word: no whitespace anywhere, no punctuation, letters only.
+    assert WORD.split() == [WORD] and WORD.isalpha(), WORD
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
